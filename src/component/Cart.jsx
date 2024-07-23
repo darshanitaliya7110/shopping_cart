@@ -1,31 +1,18 @@
 "use client"
 
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Cart = () => {
 
-    const items = [
-        {
-            id: 1,
-            title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-            price: 110,
-            description:
-                "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-            category: "men's clothing",
-            image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        },
-        {
-            id: 2,
-            title: "Mens Casual Premium Slim Fit T-Shirts ",
-            price: 25,
-            description:
-                "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-            category: "men's clothing",
-            image:
-                "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-        }]
+    const handleRemoveFromCart = (id) => {
 
-    const totalPrice = items.reduce((total, item) => total + item.price, 0);
+    }
+
+    const { cartData } = useSelector(state => state.cart)
+    console.log("cartData", cartData)
+
+    const totalPrice = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 
     return (
         <div
@@ -45,7 +32,7 @@ const Cart = () => {
                     marginBottom: '20px',
                 }}>Cart</h2>
 
-            {items.length === 0 ? (
+            {cartData.length === 0 ? (
                 <p
                     style={{
                         textAlign: 'center',
@@ -53,7 +40,7 @@ const Cart = () => {
                         color: '#888',
                     }}>No items in cart</p>
             ) : (
-                items.map((item) => (
+                cartData.map((item) => (
                     <div key={item.id}
                         style={{
                             display: 'flex',
@@ -74,7 +61,7 @@ const Cart = () => {
                                 fontSize: '1.2em',
                                 color: '#555',
                                 textAlign: 'center',
-                            }}>{item.price}</p>
+                            }}>{item.price}{`(${item.quantity})`}</p>
                         <button
                             style={{
                                 flex: '1',
