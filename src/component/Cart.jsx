@@ -1,16 +1,18 @@
 "use client"
 
+import { deleteItem } from '@/actions/cartAction'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Cart = () => {
 
-    const handleRemoveFromCart = (id) => {
+    const dispatch = useDispatch()
 
+    const handleRemoveFromCart = (id) => {
+        if (confirm("Are you sure you want to remove product from cart?")) dispatch(deleteItem({ id }))
     }
 
     const { cartData } = useSelector(state => state.cart)
-    console.log("cartData", cartData)
 
     const totalPrice = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 

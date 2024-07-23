@@ -17,6 +17,9 @@ const cartDataReducer = createReducer(initialState, (builder) => {
         }
         else return [...state, { ...action.payload, quantity: 1 }];
 
+    }).addCase(Actions.DELETE_ITEM, (state, action) => {
+        const temp = state.filter((item) => item.id !== action.payload.id);
+        return temp
     })
 
 });
