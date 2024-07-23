@@ -80,7 +80,7 @@ const Cart = () => {
                     </div>
                 ))
             )}
-            <div
+            {cartData.length > 0 && <div
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -100,7 +100,7 @@ const Cart = () => {
                         color: '#555',
                         textAlign: 'center',
                     }}>{totalPrice}</p>
-            </div>
+            </div>}
         </div >
     )
 }
