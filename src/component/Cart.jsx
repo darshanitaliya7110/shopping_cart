@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 const Cart = () => {
 
     const dispatch = useDispatch()
+    const { cartData } = useSelector(state => state.cart)
 
     const handleRemoveFromCart = (id) => {
         if (confirm("Are you sure you want to remove product from cart?")) dispatch(deleteItem({ id }))
     }
 
-    const { cartData } = useSelector(state => state.cart)
 
     const totalPrice = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -32,7 +32,9 @@ const Cart = () => {
                     textAlign: 'center',
                     fontSize: '2em',
                     marginBottom: '20px',
-                }}>Cart</h2>
+                }}>
+                Cart
+            </h2>
 
             {cartData.length === 0 ? (
                 <p
@@ -40,7 +42,9 @@ const Cart = () => {
                         textAlign: 'center',
                         fontSize: '1.2em',
                         color: '#888',
-                    }}>No items in cart</p>
+                    }}>
+                    No items in cart
+                </p>
             ) : (
                 cartData.map((item) => (
                     <div key={item.id}
@@ -56,14 +60,18 @@ const Cart = () => {
                                 flex: '2',
                                 fontSize: '1.2em',
                                 margin: '0',
-                            }}>{item.title}</h4>
+                            }}>
+                            {item.title}
+                        </h4>
                         <p
                             style={{
                                 flex: '1',
                                 fontSize: '1.2em',
                                 color: '#555',
                                 textAlign: 'center',
-                            }}>{item.price}{`(${item.quantity})`}</p>
+                            }}>
+                            {item.price}{`(${item.quantity})`}
+                        </p>
                         <button
                             style={{
                                 flex: '1',
@@ -93,13 +101,17 @@ const Cart = () => {
                     style={{
                         fontSize: '1.2em',
                         margin: '0',
-                    }}>Total Price:</h4>
+                    }}>
+                    Total Price:
+                </h4>
                 <p
                     style={{
                         fontSize: '1.2em',
                         color: '#555',
                         textAlign: 'center',
-                    }}>{totalPrice}</p>
+                    }}>
+                    {totalPrice.toFixed(2)}
+                </p>
             </div>}
         </div >
     )
